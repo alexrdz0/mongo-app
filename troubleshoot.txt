@@ -1,0 +1,2 @@
+campos de seleccion y fechas no son regresadas en archivo edit-data.hbs
+
