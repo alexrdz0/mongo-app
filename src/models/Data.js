@@ -3,8 +3,6 @@ const {Schema} = mongoose;
 
 const DataSchema = new Schema({
     //Propiedades para los datos
-    /*title: {type: String, required: true},
-    description: {type: String, required: true},*/
     date: {type: Date, default: Date.now},
     departamento: {type: String, required: true},
     avance: {type: String, required: false},
@@ -38,7 +36,7 @@ const DataSchema = new Schema({
     sha1: {type: String, required: false},
     swImagen: {type: String, required: false},
     swArte: {type: String, required: false},
-    swInfo: {type: String, required: false},
+    swInfo: {type: String, required: false}
 });
 
  //usar el modelo desde otras partes de la app

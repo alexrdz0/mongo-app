@@ -14,7 +14,7 @@ router.get('/data/add', (req, res) =>{
 router.post('/data/new-data', async (req, res) =>{  
     //obtener los valores y guardarlos
     const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-    fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo}=req.body;
+    fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file}=req.body;
     //manejar errores
     const errors=[];
     if(!nuc){
@@ -51,7 +51,7 @@ router.post('/data/new-data', async (req, res) =>{
     }else{
         //Almacenar los nuevos datos
         const newData = new Data({departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo});
+        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file});
         //await indica que ese proceso será asincrono
         await newData.save();
         console.log(newData);
@@ -61,6 +61,7 @@ router.post('/data/new-data', async (req, res) =>{
 }
     
 });
+
 /*  .save
 router.post('/data/new-data', async (req, res) =>{
     //obtener los valores y guardarlos
@@ -135,7 +136,8 @@ router.get('/data', async (req, res) =>{
                         sha1: documento.sha1,
                         swImagen: documento.swImagen,
                         swArte: documento.swArte,
-                        swInfo: documento.swInfo
+                        swInfo: documento.swInfo,
+                        file: documento.file
                     }
                 })
                 
@@ -164,24 +166,37 @@ router.get('/data/edit/:id' ,async (req, res)=>{
 });
 
 router.put('/data/edit-data/:id',async (req, res) =>{
-    const {title, description} = req.body;
-    await Data.findByIdAndUpdate(req.params.id, {title, description});
+    const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
+        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file} = req.body;
+    await Data.findByIdAndUpdate(req.params.id, {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
+        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file});
     req.flash('success_msg', 'Actualizado correctamente');
     res.redirect('/data'); 
 });
 
+/*
 //eliminar
 router.delete('/data/delete/:id',async (req, res) =>{
     await Data.findByIdAndDelete(req.params.id);
     req.flash('success_msg', 'Eliminado correctamente');
     res.redirect('/data');
 });
+*/
 
 //ver
-router.get('data/view/:id', async (req,res)=>{
+router.get('data/view-data/:id', async (req,res)=>{
     const dat= await Data.findById(req.params.id);
     res.render('data/view-data', {dat});
 });
+
+router.put('/data/view-data/:id',async (req, res) =>{
+    const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
+        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo} = req.body;
+    await Data.findByIdAndUpdate(req.params.id, {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
+        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo}); 
+});
+
+//buscar
 
 
 module.exports= router;

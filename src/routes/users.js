@@ -17,7 +17,7 @@ router.post('/users/signin', passport.authenticate('local', {
     }));
    
 
-
+/*
 //Registro de nuevo usuario
 router.get('/users/signup', (req, res) =>{
     res.render('users/signup');
@@ -66,6 +66,6 @@ router.post('/users/signup', async (req, res) =>{
         req.flash('success_msg', 'Registrado con éxito!');
         res.redirect('/users/signin');
     }
-});
+});*/
 
 module.exports= router;
