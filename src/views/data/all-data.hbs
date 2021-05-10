@@ -1,0 +1,41 @@
+
+<div class="row">
+    {{#each datos}}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title d-flex justify-content-between align-items-center">
+                    {{title}} <a href="/data/edit/{{_id}}"><i class="fas fa-edit"></i></a>
+                </h4>
+                <!--p>{{description}}</p>-->
+                <p>{{nuc}}</p>
+                <p>
+                    {{unidad}}
+                </p>
+                <form action="/data/delete/{{_id}}?_method=DELETE" method="POST">
+                    <input type="hidden" name"_method" value="DELETE">
+                    <button class= "btn  btn-danger btn-block btn-slim" type="submit">
+                        Eliminar
+                    </button>
+                    
+
+                </form>
+                <form action="/data/view/{{_id}}?_method=VIEW" method="POST">
+                    <input type="hidden" name="_method" value="VIEW">
+                    <button class="btn btn-primary btn-slim" type="submit">
+                        Ver
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <div class="card mx-auto">
+        <div class="card-body">
+            <p class="lead">Sin registro</p>
+            <a href="/data/add" class="btn btn-info btn-block">Añadir registros</a>
+        </div>
+    </div>
+    {{/each}}
+
+</div>
