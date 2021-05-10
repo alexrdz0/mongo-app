@@ -15,7 +15,7 @@ require('./database');
 require ('./config/passport.js');
 
 //configuracion
-app.set('port', process.env.PORT || 8000);
+app.set('port', process.env.PORT || 6000);
 app.set('views', path.join(__dirname, 'views'));
 
     //configuracion handlebars
