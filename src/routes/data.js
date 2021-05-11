@@ -1,65 +1,69 @@
 const { request } = require('express');
-const express= require ('express');
-const router= express.Router();
-const Data =require('../models/Data');
+const express = require('express');
+const router = express.Router();
+const Data = require('../models/Data');
+const multer = require("multer");
+const mimeTypes = require('mime-types');
 
 
-router.get('/data/add', (req, res) =>{
+router.get('/data/add', (req, res) => {
     res.render('data/new-data');
 });
 
-
 //ruta para guardar registros
-    //se utiliza async para indicar que dentro de la funcion existen procesos asincronos
-router.post('/data/new-data', async (req, res) =>{  
+//se utiliza async para indicar que dentro de la funcion existen procesos asincronos
+router.post('/data/new-data', async (req, res) => {
     //obtener los valores y guardarlos
-    const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-    fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file}=req.body;
+    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
     //manejar errores
-    const errors=[];
-    if(!nuc){
-        errors.push({text: "Por favor ingresa el NUC"});
-    } 
-    if(!oficio){
-        errors.push({text: "Por favor, añade el codigo de oficio"});
+    const errors = [];
+    if (!nuc) {
+        errors.push({ text: "Por favor ingresa el NUC" });
     }
-    if(!equipo){
-        errors.push({text: "Por favor, selecciona un tipo de Equipo"});
+    if (!oficio) {
+        errors.push({ text: "Por favor, añade el codigo de oficio" });
     }
-    if(!unidad){
-        errors.push({text: "Por favor, selecciona una unidad"});
+    if (!equipo) {
+        errors.push({ text: "Por favor, selecciona un tipo de Equipo" });
     }
-    if(!zona){
-        errors.push({text: "Por favor, selecciona una zona"});
+    if (!unidad) {
+        errors.push({ text: "Por favor, selecciona una unidad" });
     }
-    if(!fechaD){
-        errors.push({text: "Por favor, ingresa la fehca del delito"});
+    if (!zona) {
+        errors.push({ text: "Por favor, selecciona una zona" });
     }
-    if(!hora){
-        errors.push({text: "Por favor, ingresa la hora del delito"});
+    if (!fechaD) {
+        errors.push({ text: "Por favor, ingresa la fehca del delito" });
     }
-    if(!fechaR){
-        errors.push({text: "Por favor, ingresa la fecha de recolección"});
+    if (!hora) {
+        errors.push({ text: "Por favor, ingresa la hora del delito" });
     }
-    if(errors.length > 0) {
+    if (!fechaR) {
+        errors.push({ text: "Por favor, ingresa la fecha de recolección" });
+    }
+    if (errors.length > 0) {
         res.render('data/new-data', {
             errors,
-            departamento, 
+            departamento,
             nuc,
             oficio, equipo, unidad, zona, fechaD, hora, fechaR
         });
-    }else{
+    } else {
         //Almacenar los nuevos datos
-        const newData = new Data({departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file});
+
+        const newData = new Data({
+            departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+            fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file
+        });
         //await indica que ese proceso será asincrono
         await newData.save();
         console.log(newData);
         //mostrar mensaje de "correcto"
         res.render('data/data-successful');
         //res.send('ok');
-}
-    
+    }
+
 });
 
 /*  .save
@@ -96,9 +100,9 @@ router.post('/data/new-data', async (req, res) =>{
 
 
 // Consultar la base de datos
-router.get('/data', async (req, res) =>{
+router.get('/data', async (req, res) => {
     //consultar base de datos
-    await Data.find().sort({date: 'desc'})
+    await Data.find().sort({ date: 'desc' })
         .then(documentos => {
             const contexto = {
                 datos: documentos.map(documento => {
@@ -110,7 +114,7 @@ router.get('/data', async (req, res) =>{
                         nuc: documento.nuc,
                         oficio: documento.oficio,
                         equipo: documento.equipo,
-                        unidad: documento.unidad ,
+                        unidad: documento.unidad,
                         zona: documento.zona,
                         fechaD: documento.fechaD,
                         hora: documento.hora,
@@ -140,9 +144,9 @@ router.get('/data', async (req, res) =>{
                         file: documento.file
                     }
                 })
-                
+
             }
-            res.render('data/all-data.hbs', {datos: contexto.datos})
+            res.render('data/all-data.hbs', { datos: contexto.datos })
         })
 });
 
@@ -159,19 +163,21 @@ router.get('data', async (req, res) =>{
 
 
 //Editar registros
-router.get('/data/edit/:id' ,async (req, res)=>{
+router.get('/data/edit/:id', async (req, res) => {
     //obtener el ID
     const dat = await Data.findById(req.params.id);
-    res.render('data/edit-data', {dat}) ;
+    res.render('data/edit-data', { dat });
 });
 
-router.put('/data/edit-data/:id',async (req, res) =>{
-    const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file} = req.body;
-    await Data.findByIdAndUpdate(req.params.id, {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo,file});
+router.put('/data/edit-data/:id', async (req, res) => {
+    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
+    await Data.findByIdAndUpdate(req.params.id, {
+        departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file
+    });
     req.flash('success_msg', 'Actualizado correctamente');
-    res.redirect('/data'); 
+    res.redirect('/data');
 });
 
 /*
@@ -184,19 +190,23 @@ router.delete('/data/delete/:id',async (req, res) =>{
 */
 
 //ver
-router.get('data/view-data/:id', async (req,res)=>{
-    const dat= await Data.findById(req.params.id);
-    res.render('data/view-data', {dat});
+router.get('data/view-data/:id', async (req, res) => {
+    const dat = await Data.findById(req.params.id);
+    res.render('data/view-data', { dat });
 });
 
-router.put('/data/view-data/:id',async (req, res) =>{
-    const {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo} = req.body;
-    await Data.findByIdAndUpdate(req.params.id, {departamento,avance,status,nuc,oficio,equipo,unidad,zona, fechaD, hora, fechaR,id_del,delito,num_if, 
-        fechaC,lic,agente,fechaRecol,dir,dis,evidencia, banco,marcaEqui,modeloEqui,serieEqui,marcaAlma,modeloAlma,serieAlma,md5,sha1,swImagen,swArte,swInfo}); 
+router.put('/data/view-data/:id', async (req, res) => {
+    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo } = req.body;
+    await Data.findByIdAndUpdate(req.params.id, {
+        departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo
+    });
 });
 
 //buscar
 
 
-module.exports= router;
+
+
+module.exports = router;

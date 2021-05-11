@@ -4,17 +4,21 @@
 </div>
 <!--formulario para registrar datos -->
 <form action="/data/new-data" method="POST" class="row g-3" >
-  
+<hr>
+  <div >
+    <a href="/files" class="btn btn-success w-100 btn-block" ><strong>Añadir Archivos</strong></a>
+  </div>
   
   <div class="col-md-4">
     <label for="departamento" class="form-label">Departamento</label>
     <select id="departamento" class="form-select" name="departamento" required>
-      <option selected>Departamento...</option>
-      <option value="DAEDIF 50">DAEDIF 50</option>
-      <option value="DAEDIF">DAEDIF</option>
+      <option selected>Departamento</option>
+      <option value="Analisís Delictivo">Analisís Delictivo</option>
+      <option value="Información Cibernetica">Información Cibernetica</option>
+      <option value="Informatica Forénse">Informatica Forénse</option>
     </select>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-8">
     <label for="avance" class="form-label">Avance</label>
     <input type="text" class="form-control" id="avance" name="avance">
   </div>
@@ -26,7 +30,7 @@
     <label for="nuc" class="form-label">NUC</label>
     <input type="text" class="form-control" id="nuc" placeholder="Ingresa el NUC" required name="nuc">
   </div>
-  <div class="col-8">
+  <div class="col-3">
     <label for="oficio " class="form-label">Oficio</label>
     <input type="text" class="form-control" id="oficio" placeholder="Oficio" name="oficio" required>
   </div>
@@ -79,7 +83,7 @@
     <input type="date" class="form-control readonly" id="fechaR" name="fechaR" required>
   </div>
 
-  <div class="col-10">
+  <div class="col-9">
     <label for="id_del" class="form-label">Identificador del delito</label>
     <input type="text" class="form-control" id="id_del" placeholder="Identificador delito" name="id_del">
   </div>
@@ -89,7 +93,7 @@
     <input type="text" class="form-control" id="delito" placeholder="Nombre del delito" name="delito">
   </div>
   <div class="col-4">
-    <label for="num_if" class="form-label">Número de oficio IF</label>
+    <label for="num_if" class="form-label">Número respuesta de oficio</label>
     <input type="text" class="form-control" id="num_if" placeholder="Número de oficio (IF)" name="num_if">
   </div>
   <div class="col-md-3">
@@ -113,10 +117,10 @@
     <label for="dir" class="form-label">Dirección de recolección</label>
     <input type="text" class="form-control" id="dir" placeholder="dir" name="dir">
   </div>
-  <div class="col-10">
+  <!--<div class="col-10">
     <label for="dis" class="form-label">Dispositivos para entrega</label>
     <input type="text" class="form-control" id="dis" placeholder="dispositivos" name="dis">
-  </div>
+  </div>-->
   <div class="col-8">
     <label for="evidencia" class="form-label">Evidencia entregada</label>
     <input type="text" class="form-control" id="dir" placeholder="evidencia" name="evidencia">
@@ -188,8 +192,11 @@
   </div>
   -->
 
+  
+  
+  <hr>
   <div class="col-12">
     <!--  al hacer clic en el boton guarda todo el contenido del formulario-->
-    <button type="submit" class="btn btn-primary "><i class="far fa-save"></i> Guardar</button>
+    <button type="submit" class="btn btn-primary w-100"><i class="far fa-save"></i> Guardar</button>
   </div>
 </form>

@@ -13,6 +13,7 @@ const flash = require('connect-flash');
 const app = express();
 require('./database');
 require ('./config/passport.js');
+require('./routes/files.js')
 
 //configuracion
 app.set('port', process.env.PORT || 8000);
@@ -60,6 +61,7 @@ app.use((req, res, next ) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/data'));
 app.use(require('./routes/users'));
+app.use(require('./routes/files'));
 
 
 //archivos estaticos
