@@ -2,20 +2,53 @@ const express= require ('express');
 const router= express.Router();
 const User = require('../models/User');
 const passport = require ('passport');
+//pvs
+const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const { session } = require('passport');
+
+//midleware
+//app.use(morgan('dev'));
+//app.use(cookieParser());
+//app.use(bodyParser.urlencoded());
+
 
 //login
 router.get('/users/signin', (req, res) =>{
-    res.render('users/signin');
+    res.render('users/signin',{
+        message: req.flash('loginMessage')
+    })
 });
 
 router.post('/users/signin', passport.authenticate('local', {
     
-    successRedirect: '/data',
+    successRedirect: '/profile',
     failureRedirect: '/users/signin',
     // badRequestMessage: 'Algo salio mal, intenta nuevamente',
     failureFlash: true,
     }));
-   
+
+router.get('/profile', isLoggedIn, (req, res) =>{
+    res.render('data/profile',{
+        user: req.user
+    })
+}
+);
+ 
+//logout
+router.get('/logout', (req, res)=>{
+    req.logOut();
+    res.redirect('/');
+});
+
+//indicar si un usuario esta login
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()){
+        return next ();
+    }
+    return res.redirect('/');
+}
 
 /*
 //Registro de nuevo usuario
@@ -67,5 +100,7 @@ router.post('/users/signup', async (req, res) =>{
         res.redirect('/users/signin');
     }
 });*/
+//module.exports={"isLoggedIn": isLoggedIn};
 
 module.exports= router;
+

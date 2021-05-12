@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <div class="col-md-4 mx-auto">
         <div class="card-md-4 text-center">
             <div class="card-header">
@@ -23,6 +23,40 @@
                         </div>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>-->
+
+<div class="container">
+    <div class="col-sm-6 mx-auto">
+        <div class="card mt-5">
+            <div class="card-body">
+                <h1 class="text-center">
+                    <span class="fa fa-sign-in"></span>
+                    Login
+                </h1>
+                <form action="/users/signin" method="POST">
+                <div class="form-group">
+                    <label for="email" class="fas fa-user">Email</label>
+                    <input type="email" name="email" id="email" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="fas fa-key">Password</label>
+                    <input type="password" name="password" id="password" class="form-control" >
+                </div>
+                <div>
+                    <hr>
+                <input type="submit" class="btn btn-dark btn-lg w-100" value="Enviar">
+                </div>
+                </form>
+                <hr>
+                <div class="text-center">
+                    <p>Need a account? <a href="#"></a> </p>
+                    <p>Consulta al administrador</p>
+                    
+                    <a href="/" >Volver a Inicio</a>
+                </div>
             </div>
         </div>
     </div>

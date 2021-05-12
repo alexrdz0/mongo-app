@@ -2,11 +2,9 @@ const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const Data = require('../models/Data');
-const multer = require("multer");
-const mimeTypes = require('mime-types');
+//const logged = require('../routes/users');
 
-
-router.get('/data/add', (req, res) => {
+router.get('/data/add',isLoggedIn, (req, res) => {
     res.render('data/new-data');
 });
 
@@ -66,41 +64,8 @@ router.post('/data/new-data', async (req, res) => {
 
 });
 
-/*  .save
-router.post('/data/new-data', async (req, res) =>{
-    //obtener los valores y guardarlos
-    const {departemento,avance,status,nuc,oficio,equipo,unidad,}=req.body;
-    //manejar errores
-    const errors=[];
-    if(!nuc){
-        errors.push({text: "Por favor ingresa el NUC"});
-    } 
-    if(!oficio){
-        errors.push({text: "Por favor, añade el codigo de oficio"});
-    }
-    if(errors.length > 0) {
-        res.render('data/new-data', {
-            errors,
-            nuc,
-            oficio
-        });
-    }else{
-        //Almacenar los nuevos datos
-        const newData = new Data({title, description});
-        //await indica que ese proceso será asincrono
-        await newData.save();
-        console.log(newData);
-        //mostrar mensaje de "correcto"
-        res.render('data/data-successful');
-        //res.send('ok');
-    }
-    
-});*/
-
-
-
 // Consultar la base de datos
-router.get('/data', async (req, res) => {
+router.get('/data', isLoggedIn ,async (req, res) => {
     //consultar base de datos
     await Data.find().sort({ date: 'desc' })
         .then(documentos => {
@@ -150,20 +115,10 @@ router.get('/data', async (req, res) => {
         })
 });
 
-/*
-router.get('data', async (req, res) =>{
-    await Data.find().sort({date: 'desc'})
-        .then(datos => {
-            res.render ('data/all-data',{
-                datos: datos.map(datos => datos.toJSON())
-            })
-        })
-});
-*/
 
 
 //Editar registros
-router.get('/data/edit/:id', async (req, res) => {
+router.get('/data/edit/:id', isLoggedIn, async (req, res) => {
     //obtener el ID
     const dat = await Data.findById(req.params.id);
     res.render('data/edit-data', { dat });
@@ -189,24 +144,14 @@ router.delete('/data/delete/:id',async (req, res) =>{
 });
 */
 
-//ver
-router.get('data/view-data/:id', async (req, res) => {
-    const dat = await Data.findById(req.params.id);
-    res.render('data/view-data', { dat });
-});
-
-router.put('/data/view-data/:id', async (req, res) => {
-    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
-        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo } = req.body;
-    await Data.findByIdAndUpdate(req.params.id, {
-        departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
-        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo
-    });
-});
-
+//indicar si un usuario esta login
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()){
+        return next ();
+    }
+    return res.redirect('/');
+}
 //buscar
-
-
 
 
 module.exports = router;

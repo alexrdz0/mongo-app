@@ -1,13 +1,36 @@
 <div class="row">
+    <aside class="float-right">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h1 class="title">Buscar NUC</h1>
+                <hr>
+                <form action="#" method="GET">
+                    <div class="form-group">
+                        <label for="id"><strong>Id</strong></label>
+                        <input style="width: 10rem;" type="text" name="buscar" class="form-control"
+                            placeholder="Ingresa el nuc" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i>
+                            <strong>Buscar</strong></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </aside>
     {{#each datos}}
+
     <div class="col-md-3">
+
         <div class="card">
             <div class="card-body">
+
                 <h4 class="card-title d-flex justify-content-between align-items-center">
-                    {{nuc}} <!--<a href="/data/edit/{{_id}}"><i class="fas fa-edit"></i></a>-->
+                    {{nuc}}
+                    <!--<a href="/data/edit/{{_id}}"><i class="fas fa-edit"></i></a>-->
                 </h4>
                 <p>{{status}}</p>
-                
+
                 <!--<
                     Elminiar registros
                     form action="/data/delete/{{_id}}?_method=DELETE" method="POST">
@@ -19,8 +42,8 @@
 
                 </form>
                 <form action="/data/edit/{{_id}}">
-                    
-                    <button class="btn btn-primary fas fa-edit w-100"  type="submit">
+
+                    <button class="btn btn-primary fas fa-edit w-100" type="submit">
                         Editar
                     </button>
                 </form>

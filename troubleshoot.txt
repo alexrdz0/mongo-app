@@ -1,2 +1,10 @@
 campos de seleccion y fechas no son regresadas en archivo edit-data.hbs
 
+buscador para encontrar algun nuc y mostrarlo
+
+buscar algun texto contenido en algun o algunos archivos
+
+menu de navegacion, no funciona dropdown
+
+
+    

@@ -15,7 +15,7 @@ const up = multer({
     storage: storage
 });
 
-router.get("/files" , (req, res) =>{
+router.get("/files" , isLoggedIn, (req, res) =>{
     res.render("file/archivos");
 });
 
@@ -23,5 +23,13 @@ router.post("/files",up.any('x') ,(req, res)=> {
     res.render('data/new-data')
     //res.send("enviado con éxito");
 });
+
+//indicar si un usuario esta login
+function isLoggedIn(req, res, next){
+    if (req.isAuthenticated()){
+        return next ();
+    }
+    return res.redirect('/');
+}
 
 module.exports = router;

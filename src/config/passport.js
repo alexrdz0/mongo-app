@@ -4,9 +4,11 @@ const User = require('../models/User');
 
 
 passport.use( new LocalStrategy({
-    usernameField: 'email'
-}, async (email, password, done) => {
-    const user = await User.findOne({email: email});
+    usernameField: 'email',
+    passwordField: 'password',
+    passReqToCallback: true
+}, async (req, email, password, done) => {
+    const user = await User.findOne({'email': email});
     //comprobar que el usuario existe
     if(user == null){
     //if(!user){
@@ -24,12 +26,12 @@ passport.use( new LocalStrategy({
 }));
 
 //almacenar a usuario en una sesion
-passport.serializeUser((user, done) =>{
+passport.serializeUser( function (user, done) {
     done(null, user.id);
 });
 
 //buscar si existe un usuario en la sesion
-passport.deserializeUser((id, done) => {
+passport.deserializeUser( function (id, done) {
     User.findById(id, (err, user) =>{
         done(err, user);
     });
