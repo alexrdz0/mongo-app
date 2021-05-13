@@ -67,17 +67,18 @@ router.post('/data/new-data', async (req, res) => {
 // Consultar la base de datos
 router.get('/data', isLoggedIn, async function (req, res) {
     //buscar
-   /* var noMatch = null;
+    var noMatch = null;
     if (req.query.search) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
         //consultar base de datos
-        await Data.find({ nuc: regex }).sort({ date: 'desc' })
+        await Data.find({ nuc: regex })
             .then(documentos => {
                 const contexto = {
                     datos: documentos.map(documento => {
                         const errors=[];
                         if (errors) {
+                            console.log("Han ocurrido errores inesperados", req.query.search);
                             res.render('data/data-search');
                         } else {
                             return {
@@ -123,8 +124,9 @@ router.get('/data', isLoggedIn, async function (req, res) {
                 }
                 res.render('data/all-data.hbs', { datos: contexto.datos })
             });
-    } else {*/
+    } else {
         //consultar base de datos
+        console.log("no encontraron coincidencias")
         await Data.find().sort({ date: 'desc' })
             .then(documentos => {
                 const contexto = {
@@ -169,9 +171,9 @@ router.get('/data', isLoggedIn, async function (req, res) {
                     })
 
                 }
-                res.render('data/all-data.hbs', { datos: contexto.datos })
+                res.render('data/all-data', { datos: contexto.datos })
             })
-    //}
+    }
 });
 
 
@@ -211,10 +213,9 @@ function isLoggedIn(req, res, next) {
     return res.redirect('/');
 }
 
-/*
+//funcion para validar mayusculas, minusculas, acentos, espacios, etc
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-};*/
-
+};
 
 module.exports = router;

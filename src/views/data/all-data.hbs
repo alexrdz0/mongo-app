@@ -48,8 +48,6 @@
                     <button class= "btn  btn-danger btn-block btn-slim" type="submit">
                         Eliminar
                     </button>-->
-
-
                 </form>
                 <form action="/data/edit/{{_id}}">
                     <button class="btn btn-primary fas fa-edit w-100" type="submit">
@@ -60,11 +58,23 @@
         </div>
     </div>
     {{else}}
-    <div class="card mx-auto">
+    <!-- <div class="card mx-auto">
         <div class="card-body">
             <p class="lead">Sin registro</p>
             <a href="/data/add" class="btn btn-info btn-block">Añadir registros</a>
         </div>
-    </div>
+    </div>-->
+
+    <div class="container p-4">
+        <div class="card mx-auto" style="width: 35rem;">
+            <div class="card-body">
+                <h3 class="title" style="text-align:center"><strong>No se encontrarón registros.</strong></h3>
+                <p class="text-align: center">Realiza otra búsqueda o añade un registro con ese NUC.</p>
+                <a href="/data" class="btn btn-primary w-100"><i class="fas fa-arrow-left"></i> Ver todos los registros</a>
+                <hr>
+                <a href="/data/add" class="btn btn-info btn-block">Añadir registro</a>
+            </div>
+        </div>
+
     {{/each}}
-</div>
+    </div>
