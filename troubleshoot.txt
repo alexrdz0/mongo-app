@@ -6,5 +6,7 @@ buscar algun texto contenido en algun o algunos archivos
 
 menu de navegacion, no funciona dropdown
 
+es posible almacenar los archivos en el documento de cada nuc utilizando un arreglo, es decir almacenar los archivos en un array
+
 
     

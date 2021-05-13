@@ -7,7 +7,7 @@ const DataSchema = new Schema({
     departamento: {type: String, required: true},
     avance: {type: String, required: false},
     status: {type: String, required: false},
-    nuc: {type: String, required: true},
+    nuc: {type: String, required: true, index: true},
     oficio: {type: String, required: true},
     equipo: {type: String, required: true},
     unidad: {type: String, required: true},

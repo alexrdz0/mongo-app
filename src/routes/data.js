@@ -4,7 +4,7 @@ const router = express.Router();
 const Data = require('../models/Data');
 //const logged = require('../routes/users');
 
-router.get('/data/add',isLoggedIn, (req, res) => {
+router.get('/data/add', isLoggedIn, (req, res) => {
     res.render('data/new-data');
 });
 
@@ -65,54 +65,113 @@ router.post('/data/new-data', async (req, res) => {
 });
 
 // Consultar la base de datos
-router.get('/data', isLoggedIn ,async (req, res) => {
-    //consultar base de datos
-    await Data.find().sort({ date: 'desc' })
-        .then(documentos => {
-            const contexto = {
-                datos: documentos.map(documento => {
-                    return {
-                        _id: documento._id,
-                        departamento: documento.departamento,
-                        avance: documento.avance,
-                        status: documento.status,
-                        nuc: documento.nuc,
-                        oficio: documento.oficio,
-                        equipo: documento.equipo,
-                        unidad: documento.unidad,
-                        zona: documento.zona,
-                        fechaD: documento.fechaD,
-                        hora: documento.hora,
-                        fechaR: documento.fechaR,
-                        id_del: documento.id_del,
-                        delito: documento.delito,
-                        num_if: documento.num_if,
-                        fechaC: documento.fechaC,
-                        lic: documento.lic,
-                        agente: documento.agente,
-                        fechaRecol: documento.fechaRecol,
-                        dir: documento.dir,
-                        dis: documento.dis,
-                        evidencia: documento.evidencia,
-                        banco: documento.banco,
-                        marcaEqui: documento.marcaEqui,
-                        modeloEqui: documento.modeloEqui,
-                        serieEqui: documento.serieEqui,
-                        marcaAlma: documento.marcaAlma,
-                        modeloAlma: documento.modeloAlma,
-                        serieAlma: documento.serieAlma,
-                        md5: documento.md5,
-                        sha1: documento.sha1,
-                        swImagen: documento.swImagen,
-                        swArte: documento.swArte,
-                        swInfo: documento.swInfo,
-                        file: documento.file
-                    }
-                })
+router.get('/data', isLoggedIn, async function (req, res) {
+    //buscar
+   /* var noMatch = null;
+    if (req.query.search) {
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
-            }
-            res.render('data/all-data.hbs', { datos: contexto.datos })
-        })
+        //consultar base de datos
+        await Data.find({ nuc: regex }).sort({ date: 'desc' })
+            .then(documentos => {
+                const contexto = {
+                    datos: documentos.map(documento => {
+                        const errors=[];
+                        if (errors) {
+                            res.render('data/data-search');
+                        } else {
+                            return {
+                                _id: documento._id,
+                                departamento: documento.departamento,
+                                avance: documento.avance,
+                                status: documento.status,
+                                nuc: documento.nuc,
+                                oficio: documento.oficio,
+                                equipo: documento.equipo,
+                                unidad: documento.unidad,
+                                zona: documento.zona,
+                                fechaD: documento.fechaD,
+                                hora: documento.hora,
+                                fechaR: documento.fechaR,
+                                id_del: documento.id_del,
+                                delito: documento.delito,
+                                num_if: documento.num_if,
+                                fechaC: documento.fechaC,
+                                lic: documento.lic,
+                                agente: documento.agente,
+                                fechaRecol: documento.fechaRecol,
+                                dir: documento.dir,
+                                dis: documento.dis,
+                                evidencia: documento.evidencia,
+                                banco: documento.banco,
+                                marcaEqui: documento.marcaEqui,
+                                modeloEqui: documento.modeloEqui,
+                                serieEqui: documento.serieEqui,
+                                marcaAlma: documento.marcaAlma,
+                                modeloAlma: documento.modeloAlma,
+                                serieAlma: documento.serieAlma,
+                                md5: documento.md5,
+                                sha1: documento.sha1,
+                                swImagen: documento.swImagen,
+                                swArte: documento.swArte,
+                                swInfo: documento.swInfo,
+                                file: documento.file
+                            }
+                        }
+                    })
+
+                }
+                res.render('data/all-data.hbs', { datos: contexto.datos })
+            });
+    } else {*/
+        //consultar base de datos
+        await Data.find().sort({ date: 'desc' })
+            .then(documentos => {
+                const contexto = {
+                    datos: documentos.map(documento => {
+                        return {
+                            _id: documento._id,
+                            departamento: documento.departamento,
+                            avance: documento.avance,
+                            status: documento.status,
+                            nuc: documento.nuc,
+                            oficio: documento.oficio,
+                            equipo: documento.equipo,
+                            unidad: documento.unidad,
+                            zona: documento.zona,
+                            fechaD: documento.fechaD,
+                            hora: documento.hora,
+                            fechaR: documento.fechaR,
+                            id_del: documento.id_del,
+                            delito: documento.delito,
+                            num_if: documento.num_if,
+                            fechaC: documento.fechaC,
+                            lic: documento.lic,
+                            agente: documento.agente,
+                            fechaRecol: documento.fechaRecol,
+                            dir: documento.dir,
+                            dis: documento.dis,
+                            evidencia: documento.evidencia,
+                            banco: documento.banco,
+                            marcaEqui: documento.marcaEqui,
+                            modeloEqui: documento.modeloEqui,
+                            serieEqui: documento.serieEqui,
+                            marcaAlma: documento.marcaAlma,
+                            modeloAlma: documento.modeloAlma,
+                            serieAlma: documento.serieAlma,
+                            md5: documento.md5,
+                            sha1: documento.sha1,
+                            swImagen: documento.swImagen,
+                            swArte: documento.swArte,
+                            swInfo: documento.swInfo,
+                            file: documento.file
+                        }
+                    })
+
+                }
+                res.render('data/all-data.hbs', { datos: contexto.datos })
+            })
+    //}
 });
 
 
@@ -145,13 +204,17 @@ router.delete('/data/delete/:id',async (req, res) =>{
 */
 
 //indicar si un usuario esta login
-function isLoggedIn(req, res, next){
-    if (req.isAuthenticated()){
-        return next ();
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
     }
     return res.redirect('/');
 }
-//buscar
+
+/*
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};*/
 
 
 module.exports = router;
