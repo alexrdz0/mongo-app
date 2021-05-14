@@ -1,12 +1,16 @@
 campos de seleccion y fechas no son regresadas en archivo edit-data.hbs
 
 buscador para encontrar algun nuc y mostrarlo
-
 buscar algun texto contenido en algun o algunos archivos
 
-menu de navegacion, no funciona dropdown
+el usuario en sesion no aparece en todas las ventanas
+
+almacenar el algun archivo dentro del documento mongo , junto con los datos de new-data.hbs
+
 
 es posible almacenar los archivos en el documento de cada nuc utilizando un arreglo, es decir almacenar los archivos en un array
+
+
 
 
     
