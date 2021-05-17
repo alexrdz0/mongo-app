@@ -6,9 +6,10 @@ buscar algun texto contenido en algun o algunos archivos
 el usuario en sesion no aparece en todas las ventanas
 
 almacenar el algun archivo dentro del documento mongo , junto con los datos de new-data.hbs
-
-
 es posible almacenar los archivos en el documento de cada nuc utilizando un arreglo, es decir almacenar los archivos en un array
+
+dar restricciones a usuarios para editar ciertos campos (todos pueden ver,solo alanistas pueden editar, solo uno puede crear nuevos y editar, jefes pueden hacer todo)
+
 
 
 

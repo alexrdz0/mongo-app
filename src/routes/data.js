@@ -123,6 +123,13 @@ router.get('/data/edit/:id', isLoggedIn, async (req, res) => {
     res.render('data/edit-data', { dat });
 });
 
+//Ver registros
+router.get('/data/view/:id', isLoggedIn, async (req, res) => {
+    //obtener el ID
+    const dat = await Data.findById(req.params.id);
+    res.render('data/view-data', { dat });
+});
+
 router.put('/data/edit-data/:id', async (req, res) => {
     const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
         fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
