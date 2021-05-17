@@ -65,7 +65,7 @@ router.post('/data/new-data', async (req, res) => {
 });
 
 // Consultar la base de datos
-router.get('/data', isLoggedIn, async function (req, res) {
+router.get('/data', /*isLoggedIn,*/ async function (req, res) {
     //consultar base de datos
     await Data.find().sort({ date: 'desc' })
         .then(documentos => {
@@ -155,9 +155,13 @@ function isLoggedIn(req, res, next) {
     if (req.isAuthenticated()) {
         return next();
     }
-    return res.redirect('/');
+    return res.redirect('/data/private');
 }
 
+//acceso privado
+router.get('/data/private', (req, res) => {
+    res.render('data/private');
+});
 
 
 router.get('/data/search', /*isLoggedIn,*/ async function (req, res) {
