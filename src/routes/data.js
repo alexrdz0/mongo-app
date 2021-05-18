@@ -123,13 +123,6 @@ router.get('/data/edit/:id', isLoggedIn, async (req, res) => {
     res.render('data/edit-data', { dat });
 });
 
-//Ver registros
-router.get('/data/view/:id', isLoggedIn, async (req, res) => {
-    //obtener el ID
-    const dat = await Data.findById(req.params.id);
-    res.render('data/view-data', { dat });
-});
-
 router.put('/data/edit-data/:id', async (req, res) => {
     const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
         fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
@@ -141,6 +134,13 @@ router.put('/data/edit-data/:id', async (req, res) => {
     res.redirect('/data');
 });
 
+//Ver registros
+router.get('/data/view/:id', isLoggedIn, async (req, res) => {
+    //obtener el ID
+    const dat = await Data.findById(req.params.id);
+    res.render('data/view-data', { dat });
+});
+
 /*
 //eliminar
 router.delete('/data/delete/:id',async (req, res) =>{
@@ -150,21 +150,8 @@ router.delete('/data/delete/:id',async (req, res) =>{
 });
 */
 
-//indicar si un usuario esta login
-function isLoggedIn(req, res, next) {
-    if (req.isAuthenticated()) {
-        return next();
-    }
-    return res.redirect('/data/private');
-}
-
-//acceso privado
-router.get('/data/private', (req, res) => {
-    res.render('data/private');
-});
-
-
-router.get('/data/search', /*isLoggedIn,*/ async function (req, res) {
+//BUSCAR
+router.get('/data/search', async function (req, res) {
     //buscar
     var noMatch = null;
     //const errors = [];
@@ -276,7 +263,58 @@ router.get('/data/search', /*isLoggedIn,*/ async function (req, res) {
     }
 });
 
+/*
+SEGUNDA OPCION DE BUSCADOR
 
+router.get('/data/search',async function (req, res) {
+    //buscar
+    //var noMatch = null;
+    var errors = [];
+    if (req.query.search) {
+        console.log("Se esta buscando: ", req.query.search);
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        console.log("pasando el regex");
+        const dat = await Data.findById(req.params.id);
+        const buscar= await Data.find({ nuc: req.query.search })
+        if (errors) {
+            console.log("Error en finde", req.query.search);
+            res.render('data/data-searchError');
+        } else {
+            return buscar;
+            console.log("mostrando resultados");  
+        }
+    }
+    else {
+  
+            res.render('data/search');
+        }
+});
+
+router.post('/data/search/:id', async (req, res) => {
+    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
+    await Data.findByIdAndUpdate(req.params.id, {
+        departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
+        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file
+    });
+    req.flash('success_msg', 'Actualizado correctamente');
+    //res.redirect('/data');
+});
+*/
+
+
+//indicar si un usuario esta login
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    return res.redirect('/data/private');
+}
+
+//acceso privado
+router.get('/data/private', (req, res) => {
+    res.render('data/private');
+});
 
 //funcion para validar mayusculas, minusculas, acentos, espacios, etc
 function escapeRegex(text) {

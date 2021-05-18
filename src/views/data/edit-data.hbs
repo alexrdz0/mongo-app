@@ -1,15 +1,18 @@
-
-        <div class="card-header mx-auto">
-            <h3>Editar Registro</h3>
-        </div>
+<div style="color:#FFF;">
+    <header class="masthead">
+    <div class="container">
+        <div class="masthead-subheading">Editar Registros</div>  
+    </div>
+</header>
+       
         <div class="row g-3">
             <form action="/data/edit-data/{{dat._id}}?_method=PUT" method="POST" class="row g-3">
                 <input type="hidden" name="_method" value="PUT">
 
                 <div class="col-md-4">
                     <label for="departamento" class="form-label">Departamento</label>
-                    <select id="departamento" class="form-select" name="departamento"> 
-                        <option selected value="{{departamento}}">departamento</option>
+                    <select id="departamento" class="form-select" name="departamento" value="{{dat.departamento}}"> 
+                        <option selected >departamento</option>
                         <option value="DAEDIF 50">DAEDIF 50</option>
                         <option value="DAEDIF">DAEDIF</option>
                     </select>
@@ -32,8 +35,8 @@
                 </div>
                 <div class="col-md-3">
                     <label for="equipo" class="form-label">Equipo</label>
-                    <select id="equipo" class="form-select" name="equipo" required > 
-                        <option value="{{dat.equipo}}">SELECCIONA</option>
+                    <select id="equipo" class="form-select" name="equipo" required value="{{dat.equipo}}"> 
+                        <option selected>SELECCIONA</option>
                         <option value="Computadora">Computadora</option>
                         <option value="Laptop">Laptop</option>
                         <option value="Celular">Celular</option>
@@ -44,7 +47,7 @@
 
                 <div class="col-md-3">
                     <label for="unidad" class="form-label">Unidad</label>
-                    <select id="unidad" class="form-select" name="unidad" required>
+                    <select id="unidad" class="form-select" name="unidad" required value="{{dat.unidad}}">
                         <option selected>SELECCIONA</option>
                         <option value="Unidad Especializada de delitos patrimoniales">Unidad Especializada de delitos
                             patrimoniales</option>
@@ -57,7 +60,7 @@
 
                 <div class="col-md-3">
                     <label for="zona" class="form-label">Zona</label>
-                    <select id="zona" class="form-select" required name="zona" value="{{dat.fechaD}}">
+                    <select id="zona" class="form-select" required name="zona" value="{{dat.zona}}">
                         <option selected>SELECCIONA</option>
                         <option value="Chihuahua">Chihuahua</option>
                         <option value="zon1">agregar faltantes</option>
@@ -188,5 +191,6 @@
                     <button type="submit" class="btn btn-primary "><i class="far fa-save"></i> Guardar</button>
 
             </form>
+            </div>
         </div>
    
