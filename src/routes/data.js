@@ -275,7 +275,7 @@ router.get('/data/search',async function (req, res) {
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
         const dat = await Data.findById(req.params.id);
         const buscar= await Data.find({ nuc: req.query.search })
-        if (!buscar) {
+        if (errors) {
             console.log("Error en find (", req.query.search,")");
             res.render('data/data-searchError');
         } else {
