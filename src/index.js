@@ -15,6 +15,7 @@ require('./database');
 require ('./config/passport.js');
 require('./routes/files.js')
 
+
 //configuracion
 app.set('port', process.env.PORT || 8000);
 app.set('views', path.join(__dirname, 'views'));

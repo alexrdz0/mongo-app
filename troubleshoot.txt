@@ -1,6 +1,6 @@
-campos de seleccion y fechas no son regresadas en archivo edit-data.hbs
+campos de seleccion y fechas no son regresadas en archivo edit-data.hbs, se utilizo angular.js pero no regresa los valores
 
-buscador para encontrar algun nuc y mostrarlo
+se encuentra el nuc pero no devuelve datos
 buscar algun texto contenido en algun o algunos archivos
 
 el usuario en sesion no aparece en todas las ventanas

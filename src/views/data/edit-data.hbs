@@ -1,196 +1,212 @@
 <div style="color:#FFF;">
     <header class="masthead">
-    <div class="container">
-        <div class="masthead-subheading">Editar Registros</div>  
-    </div>
-</header>
-       
-        <div class="row g-3">
-            <form action="/data/edit-data/{{dat._id}}?_method=PUT" method="POST" class="row g-3">
-                <input type="hidden" name="_method" value="PUT">
+        <div class="container">
+            <div class="masthead-subheading">Editar Registros</div>
+        </div>
+    </header>
 
-                <div class="col-md-4">
-                    <label for="departamento" class="form-label">Departamento</label>
-                    <select id="departamento" class="form-select" name="departamento" value="{{dat.departamento}}"> 
-                        <option selected >departamento</option>
-                        <option value="DAEDIF 50">DAEDIF 50</option>
-                        <option value="DAEDIF">DAEDIF</option>
-                    </select>
-                </div>
-                <div class="col-md-4">
-                    <label for="avance" class="form-label">Avance</label>
-                    <input type="text" class="form-control" id="avance" name="avance" value="{{dat.avance}}">
-                </div>
-                <div class="col-md-3">
-                    <label for="status" class="form-label">Status</label>
-                    <input type="status" class="form-control" id="status" name="status" value="{{dat.status}}">
-                </div>
-                <div class="col-3">
-                    <label for="nuc" class="form-label">NUC</label>
-                    <input type="text" class="form-control" id="nuc" placeholder="Ingresa el NUC" required name="nuc" value="{{dat.nuc}}">
-                </div>
-                <div class="col-8">
-                    <label for="oficio " class="form-label">Oficio</label>
-                    <input type="text" class="form-control" id="oficio" placeholder="Oficio" name="oficio" required value="{{dat.oficio}}"> 
-                </div>
-                <div class="col-md-3">
-                    <label for="equipo" class="form-label">Equipo</label>
-                    <select id="equipo" class="form-select" name="equipo" required value="{{dat.equipo}}"> 
-                        <option selected>SELECCIONA</option>
-                        <option value="Computadora">Computadora</option>
-                        <option value="Laptop">Laptop</option>
-                        <option value="Celular">Celular</option>
-                        <option value="Tablet">Tablet</option>
-                        <option value="Otro">Otro</option>
-                    </select>
-                </div>
+    <div class="row g-3">
+        <form action="/data/edit-data/{{dat._id}}?_method=PUT" method="POST" class="row g-3">
+            <input type="hidden" name="_method" value="PUT">
 
-                <div class="col-md-3">
-                    <label for="unidad" class="form-label">Unidad</label>
-                    <select id="unidad" class="form-select" name="unidad" required value="{{dat.unidad}}">
-                        <option selected>SELECCIONA</option>
-                        <option value="Unidad Especializada de delitos patrimoniales">Unidad Especializada de delitos
-                            patrimoniales</option>
-                        <option value="Unidad Especializada de delitos de extorsiones">Unidad Especializada de delitos
-                            de extorsiones</option>
-                        <option value="Dirección de inspección interna">Dirección de inspección interna</option>
-                        <option value="uni0">agregar faltantes</option>
-                    </select>
-                </div>
+            <div class="col-md-4" ng-controller="ExampleController">
 
-                <div class="col-md-3">
-                    <label for="zona" class="form-label">Zona</label>
-                    <select id="zona" class="form-select" required name="zona" value="{{dat.zona}}">
-                        <option selected>SELECCIONA</option>
-                        <option value="Chihuahua">Chihuahua</option>
-                        <option value="zon1">agregar faltantes</option>
-                    </select>
-                </div>
+                <label for="singleSelect"> Departamento </label>
+               <input type="text" ng-model="data.singleSelect">
+            </div>
 
-                <div class="col-md-3">
-                    <label for="FechaD" class="form-label">Fecha de delito</label>
-                    <input type="date" class="form-control" id="fechaD" name="fechaD" required value="{{dat.fechaD}}">
-                </div>
+            <div class="col-md-4">
+                <label for="avance" class="form-label">Avance</label>
+                <input type="text" class="form-control" id="avance" name="avance" value="{{dat.avance}}">
+            </div>
+            <div class="col-md-3">
+                <label for="status" class="form-label">Status</label>
+                <input type="status" class="form-control" id="status" name="status" value="{{dat.status}}">
+            </div>
+            <div class="col-3">
+                <label for="nuc" class="form-label">NUC</label>
+                <input type="text" class="form-control" id="nuc" placeholder="Ingresa el NUC" required name="nuc"
+                    value="{{dat.nuc}}">
+            </div>
+            <div class="col-8">
+                <label for="oficio " class="form-label">Oficio</label>
+                <input type="text" class="form-control" id="oficio" placeholder="Oficio" name="oficio" required
+                    value="{{dat.oficio}}">
+            </div>
+            <div class="col-md-3">
+                <label for="equipo" class="form-label">Equipo</label>
+                <select id="equipo" class="form-select" name="equipo" required value="{{dat.equipo}}">
+                    <option selected>SELECCIONA</option>
+                    <option value="Computadora">Computadora</option>
+                    <option value="Laptop">Laptop</option>
+                    <option value="Celular">Celular</option>
+                    <option value="Tablet">Tablet</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
 
-                <div class="col-md-3">
-                    <label for="hora" class="form-label">Hora aproximada del delito</label>
-                    <input type="time" class="form-control" id="hora" name="hora" required value="{{dat.hora}}">
-                </div>
+            <div class="col-md-3">
+                <label for="unidad" class="form-label">Unidad</label>
+                <select id="unidad" class="form-select" name="unidad" required value="{{dat.unidad}}">
+                    <option selected>SELECCIONA</option>
+                    <option value="Unidad Especializada de delitos patrimoniales">Unidad Especializada de delitos
+                        patrimoniales</option>
+                    <option value="Unidad Especializada de delitos de extorsiones">Unidad Especializada de delitos
+                        de extorsiones</option>
+                    <option value="Dirección de inspección interna">Dirección de inspección interna</option>
+                    <option value="uni0">agregar faltantes</option>
+                </select>
+            </div>
 
-                <div class="col-md-3">
-                    <label for="fechaR" class="form-label">Fecha de recepción</label>
-                    <input type="date" class="form-control readonly" id="fechaR" name="fechaR" required value="{{dat.fechaR}}">
-                </div>
+            <div class="col-md-3">
+                <label for="zona" class="form-label">Zona</label>
+                <select id="zona" class="form-select" required name="zona" value="{{dat.zona}}">
+                    <option selected>SELECCIONA</option>
+                    <option value="Chihuahua">Chihuahua</option>
+                    <option value="zon1">agregar faltantes</option>
+                </select>
+            </div>
 
-                <div class="col-10">
-                    <label for="id_del" class="form-label">Identificador del delito</label>
-                    <input type="text" class="form-control" id="id_del" placeholder="Identificador delito"
-                        name="id_del" value="{{dat.id_del}}">
-                </div>
+            <div class="col-md-3">
+                <label for="FechaD" class="form-label">Fecha de delito</label>
+                <input type="date" class="form-control" id="fechaD" name="fechaD" required value="{{dat.fechaD}}">
+            </div>
 
-                <div class="col-6">
-                    <label for="delito" class="form-label">Delito</label>
-                    <input type="text" class="form-control" id="delito" placeholder="Nombre del delito" name="delito" value="{{dat.delito}}">
+            <div class="col-md-3">
+                <label for="hora" class="form-label">Hora aproximada del delito</label>
+                <input type="time" class="form-control" id="hora" name="hora" required value="{{dat.hora}}">
+            </div>
+
+            <div class="col-md-3">
+                <label for="fechaR" class="form-label">Fecha de recepción</label>
+                <input type="date" class="form-control readonly" id="fechaR" name="fechaR" required
+                    value="{{dat.fechaR}}">
+            </div>
+
+            <div class="col-10">
+                <label for="id_del" class="form-label">Identificador del delito</label>
+                <input type="text" class="form-control" id="id_del" placeholder="Identificador delito" name="id_del"
+                    value="{{dat.id_del}}">
+            </div>
+
+            <div class="col-6">
+                <label for="delito" class="form-label">Delito</label>
+                <input type="text" class="form-control" id="delito" placeholder="Nombre del delito" name="delito"
+                    value="{{dat.delito}}">
+            </div>
+            <div class="col-4">
+                <label for="num_if" class="form-label">Número de oficio IF</label>
+                <input type="text" class="form-control" id="num_if" placeholder="Número de oficio (IF)" name="num_if"
+                    value="{{dat.num_if}}">
+            </div>
+            <div class="col-md-3">
+                <label for="FechaC" class="form-label">Fecha cont</label>
+                <input type="date" class="form-control" id="fechaC" name="fechaC" value="{{dat.fechaC}}">
+            </div>
+
+            <div class="col-6">
+                <label for="lic" class="form-label">Licenciado(a)</label>
+                <input type="text" class="form-control" id="lic" placeholder="Nombre del Lic." name="lic"
+                    value="{{dat.lic}}">
+            </div>
+            <div class="col-6">
+                <label for="agente" class="form-label">Agente</label>
+                <input type="text" class="form-control" id="agente" placeholder="Nombre del Agente" name="agente"
+                    value="{{dat.agente}}">
+            </div>
+            <div class="col-md-3">
+                <label for="echaRecol" class="form-label">Fecha de Recolección</label>
+                <input type="date" class="form-control readonly" id="echaRecol" name="fechaRecol"
+                    value="{{dat.fechaRecol}}">
+            </div>
+            <div class="col-12">
+                <label for="dir" class="form-label">Dirección de recolección</label>
+                <input type="text" class="form-control" id="dir" placeholder="dir" name="dir" value="{{dat.dir}}">
+            </div>
+            <div class="col-10">
+                <label for="dis" class="form-label">Dispositivos para entrega</label>
+                <input type="text" class="form-control" id="dis" placeholder="dispositivos" name="dis"
+                    value="{{dat.dis}}">
+            </div>
+            <div class="col-8">
+                <label for="evidencia" class="form-label">Evidencia entregada</label>
+                <input type="text" class="form-control" id="dir" placeholder="evidencia" name="evidencia"
+                    value="{{dat.evidencia}}">
+            </div>
+
+            <!--Ocultar seccion -->
+            <p>
+                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
+                    aria-expanded="true" aria-controls="collapse1">
+                    Mostrar información para analistas
+                </button>
+            </p>
+            <div class="collapse" id="collapse1">
+
+                <div class="col-4">
+                    <label for="banco" class="form-label">Banco</label>
+                    <input type="text" class="form-control" id="banco" placeholder="" name="banco"
+                        value="{{dat.banco}}">
                 </div>
                 <div class="col-4">
-                    <label for="num_if" class="form-label">Número de oficio IF</label>
-                    <input type="text" class="form-control" id="num_if" placeholder="Número de oficio (IF)"
-                        name="num_if" value="{{dat.num_if}}">
+                    <label for="marcaEqui" class="form-label">Marca del Equipo</label>
+                    <input type="text" class="form-control" id="marcaEqui" placeholder="" name="marcaEqui"
+                        value="{{dat.marcaEqui}}">
                 </div>
-                <div class="col-md-3">
-                    <label for="FechaC" class="form-label">Fecha cont</label>
-                    <input type="date" class="form-control" id="fechaC" name="fechaC" value="{{dat.fechaC}}">
+                <div class="col-4">
+                    <label for="modeloEqui" class="form-label">Modelo del Equipo</label>
+                    <input type="text" class="form-control" id="modeloEqui" placeholder="" name="modeloEqui"
+                        value="{{dat.modeloEqui}}">
                 </div>
-
-                <div class="col-6">
-                    <label for="lic" class="form-label">Licenciado(a)</label>
-                    <input type="text" class="form-control" id="lic" placeholder="Nombre del Lic." name="lic" value="{{dat.lic}}">
+                <div class="col-4">
+                    <label for="serieEqui" class="form-label">Número de serie del Equipo</label>
+                    <input type="text" class="form-control" id="serieEqui" placeholder="" name="serieEqui"
+                        value="{{dat.serieEqui}}">
                 </div>
-                <div class="col-6">
-                    <label for="agente" class="form-label">Agente</label>
-                    <input type="text" class="form-control" id="agente" placeholder="Nombre del Agente" name="agente" value="{{dat.agente}}">
+                <div class="col-4">
+                    <label for="marcaAlma" class="form-label">Marca de almacenamiento</label>
+                    <input type="text" class="form-control" id="marcaAlma" placeholder="" name="marcaAlma"
+                        value="{{dat.marcaAlma}}">
                 </div>
-                <div class="col-md-3">
-                    <label for="echaRecol" class="form-label">Fecha de Recolección</label>
-                    <input type="date" class="form-control readonly" id="echaRecol" name="fechaRecol" value="{{dat.fechaRecol}}">
+                <div class="col-4">
+                    <label for="modeloAlma" class="form-label">Modelo del almacenamiento</label>
+                    <input type="text" class="form-control" id="modeloAlma" placeholder="" name="modeloAlma"
+                        value="{{dat.modeloAlma}}">
                 </div>
-                <div class="col-12">
-                    <label for="dir" class="form-label">Dirección de recolección</label>
-                    <input type="text" class="form-control" id="dir" placeholder="dir" name="dir" value="{{dat.dir}}">
-                </div>
-                <div class="col-10">
-                    <label for="dis" class="form-label">Dispositivos para entrega</label>
-                    <input type="text" class="form-control" id="dis" placeholder="dispositivos" name="dis" value="{{dat.dis}}">
+                <div class="col-4">
+                    <label for="serieAlma" class="form-label">Número de serie del almacenamiento</label>
+                    <input type="text" class="form-control" id="serieAlma" placeholder="" name="serieAlma"
+                        value="{{dat.serieAlma}}">
                 </div>
                 <div class="col-8">
-                    <label for="evidencia" class="form-label">Evidencia entregada</label>
-                    <input type="text" class="form-control" id="dir" placeholder="evidencia" name="evidencia" value="{{dat.evidencia}}">
+                    <label for="md5" class="form-label">MD5</label>
+                    <input type="text" class="form-control" id="md5" placeholder="" name="md5" value="{{dat.md5}}">
                 </div>
-
-                <!--Ocultar seccion -->
-                <p>
-                    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
-                        aria-expanded="true" aria-controls="collapse1">
-                        Mostrar información para analistas
-                    </button>
-                </p>
-                <div class="collapse" id="collapse1">
-
-                    <div class="col-4">
-                        <label for="banco" class="form-label">Banco</label>
-                        <input type="text" class="form-control" id="banco" placeholder="" name="banco" value="{{dat.banco}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="marcaEqui" class="form-label">Marca del Equipo</label>
-                        <input type="text" class="form-control" id="marcaEqui" placeholder="" name="marcaEqui" value="{{dat.marcaEqui}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="modeloEqui" class="form-label">Modelo del Equipo</label>
-                        <input type="text" class="form-control" id="modeloEqui" placeholder="" name="modeloEqui"  value="{{dat.modeloEqui}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="serieEqui" class="form-label">Número de serie del Equipo</label>
-                        <input type="text" class="form-control" id="serieEqui" placeholder="" name="serieEqui" value="{{dat.serieEqui}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="marcaAlma" class="form-label">Marca de almacenamiento</label>
-                        <input type="text" class="form-control" id="marcaAlma" placeholder="" name="marcaAlma" value="{{dat.marcaAlma}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="modeloAlma" class="form-label">Modelo del almacenamiento</label>
-                        <input type="text" class="form-control" id="modeloAlma" placeholder="" name="modeloAlma" value="{{dat.modeloAlma}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="serieAlma" class="form-label">Número de serie del almacenamiento</label>
-                        <input type="text" class="form-control" id="serieAlma" placeholder="" name="serieAlma" value="{{dat.serieAlma}}">
-                    </div>
-                    <div class="col-8">
-                        <label for="md5" class="form-label">MD5</label>
-                        <input type="text" class="form-control" id="md5" placeholder="" name="md5" value="{{dat.md5}}">
-                    </div>
-                    <div class="col-8">
-                        <label for="sha1" class="form-label">SHA1</label>
-                        <input type="text" class="form-control" id="sha1" placeholder="" name="sha1" value="{{dat.sha1}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="swImagen" class="form-label">Software creador de imagén</label>
-                        <input type="text" class="form-control" id="swImagen" placeholder="" name="swImagen" value="{{dat.swImaen}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="swArte" class="form-label">Software artefactos</label>
-                        <input type="text" class="form-control" id="swArte" placeholder="" name="swArte" value="{{dat.swArte}}">
-                    </div>
-                    <div class="col-4">
-                        <label for="swInfo" class="form-label">Software información</label>
-                        <input type="text" class="form-control" id="swInfo" placeholder="" name="swInfo" value="{{dat.swInfo}}">
-                    </div>
+                <div class="col-8">
+                    <label for="sha1" class="form-label">SHA1</label>
+                    <input type="text" class="form-control" id="sha1" placeholder="" name="sha1" value="{{dat.sha1}}">
                 </div>
-
-                <div class="col-12">
-                    <!--  al hacer clic en el boton guarda todo el contenido del formulario-->
-                    <button type="submit" class="btn btn-primary "><i class="far fa-save"></i> Guardar</button>
-
-            </form>
+                <div class="col-4">
+                    <label for="swImagen" class="form-label">Software creador de imagén</label>
+                    <input type="text" class="form-control" id="swImagen" placeholder="" name="swImagen"
+                        value="{{dat.swImaen}}">
+                </div>
+                <div class="col-4">
+                    <label for="swArte" class="form-label">Software artefactos</label>
+                    <input type="text" class="form-control" id="swArte" placeholder="" name="swArte"
+                        value="{{dat.swArte}}">
+                </div>
+                <div class="col-4">
+                    <label for="swInfo" class="form-label">Software información</label>
+                    <input type="text" class="form-control" id="swInfo" placeholder="" name="swInfo"
+                        value="{{dat.swInfo}}">
+                </div>
             </div>
-        </div>
-   
+
+            <div class="col-12">
+                <!--  al hacer clic en el boton guarda todo el contenido del formulario-->
+                <button type="submit" class="btn btn-primary "><i class="far fa-save"></i> Guardar</button>
+
+        </form>
+    </div>
+</div>

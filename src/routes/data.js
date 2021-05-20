@@ -2,7 +2,6 @@ const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const Data = require('../models/Data');
-//const logged = require('../routes/users');
 
 router.get('/data/add', isLoggedIn, (req, res) => {
     res.render('data/new-data');
@@ -10,6 +9,7 @@ router.get('/data/add', isLoggedIn, (req, res) => {
 
 //ruta para guardar registros
 //se utiliza async para indicar que dentro de la funcion existen procesos asincronos
+
 router.post('/data/new-data', async (req, res) => {
     //obtener los valores y guardarlos
     const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
@@ -130,6 +130,7 @@ router.put('/data/edit-data/:id', async (req, res) => {
         departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
         fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file
     });
+    console.log(req.body);
     req.flash('success_msg', 'Actualizado correctamente');
     res.redirect('/data');
 });
@@ -141,167 +142,26 @@ router.get('/data/view/:id', isLoggedIn, async (req, res) => {
     res.render('data/view-data', { dat });
 });
 
-/*
-//eliminar
-router.delete('/data/delete/:id',async (req, res) =>{
-    await Data.findByIdAndDelete(req.params.id);
-    req.flash('success_msg', 'Eliminado correctamente');
-    res.redirect('/data');
-});
-*/
-/*
-//BUSCAR
-router.get('/data/search', async function (req, res) {
+//BUSCAR2
+router.get('/data/search/', /*isLoggedIn,*/ async function (req, res) {
     //buscar
     var noMatch = null;
-    //const errors = [];
     if (req.query.search) {
         console.log("Se esta buscando: ", req.query.search);
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+        console.log(regex)
         //consultar base de datos
-        console.log("pasando el regex");
-        await Data.find()
-            .then(documentos => {
-                const contexto = {
-                    datos: documentos.map(documento => {
-                        if (error) {
-                            console.log("Error en finde", req.query.search);
-                            res.render('data/data-searchError');
-                        } else {
-                            return {
-                                _id: documento._id,
-                                departamento: documento.departamento,
-                                avance: documento.avance,
-                                status: documento.status,
-                                nuc: documento.nuc,
-                                oficio: documento.oficio,
-                                equipo: documento.equipo,
-                                unidad: documento.unidad,
-                                zona: documento.zona,
-                                fechaD: documento.fechaD,
-                                hora: documento.hora,
-                                fechaR: documento.fechaR,
-                                id_del: documento.id_del,
-                                delito: documento.delito,
-                                num_if: documento.num_if,
-                                fechaC: documento.fechaC,
-                                lic: documento.lic,
-                                agente: documento.agente,
-                                fechaRecol: documento.fechaRecol,
-                                dir: documento.dir,
-                                dis: documento.dis,
-                                evidencia: documento.evidencia,
-                                banco: documento.banco,
-                                marcaEqui: documento.marcaEqui,
-                                modeloEqui: documento.modeloEqui,
-                                serieEqui: documento.serieEqui,
-                                marcaAlma: documento.marcaAlma,
-                                modeloAlma: documento.modeloAlma,
-                                serieAlma: documento.serieAlma,
-                                md5: documento.md5,
-                                sha1: documento.sha1,
-                                swImagen: documento.swImagen,
-                                swArte: documento.swArte,
-                                swInfo: documento.swInfo,
-                                file: documento.file
-                            }
-                        }
-                    })
-
-                }
-                res.render('data/all-data.hbs', { datos: contexto.datos })
-            })
-    }else {
-        //consultar base de datos
-        console.log("ingresando al else");
-        await Data.find().sort({ date: 'desc' })
-            .then(documentos => {
-                const contexto = {
-                    datos: documentos.map(documento => {
-                        return {
-                            _id: documento._id,
-                            departamento: documento.departamento,
-                            avance: documento.avance,
-                            status: documento.status,
-                            nuc: documento.nuc,
-                            oficio: documento.oficio,
-                            equipo: documento.equipo,
-                            unidad: documento.unidad,
-                            zona: documento.zona,
-                            fechaD: documento.fechaD,
-                            hora: documento.hora,
-                            fechaR: documento.fechaR,
-                            id_del: documento.id_del,
-                            delito: documento.delito,
-                            num_if: documento.num_if,
-                            fechaC: documento.fechaC,
-                            lic: documento.lic,
-                            agente: documento.agente,
-                            fechaRecol: documento.fechaRecol,
-                            dir: documento.dir,
-                            dis: documento.dis,
-                            evidencia: documento.evidencia,
-                            banco: documento.banco,
-                            marcaEqui: documento.marcaEqui,
-                            modeloEqui: documento.modeloEqui,
-                            serieEqui: documento.serieEqui,
-                            marcaAlma: documento.marcaAlma,
-                            modeloAlma: documento.modeloAlma,
-                            serieAlma: documento.serieAlma,
-                            md5: documento.md5,
-                            sha1: documento.sha1,
-                            swImagen: documento.swImagen,
-                            swArte: documento.swArte,
-                            swInfo: documento.swInfo,
-                            file: documento.file
-                        }
-                    })
-
-                }
-        res.render('data/search', { datos: contexto.datos });
-        })
-    }
-});
-*/
-
-//SEGUNDA OPCION DE BUSCADOR
-
-router.get('/data/search',async function (req, res) {
-    //buscar
-    //var noMatch = null;
-    var errors = [];
-    if (req.query.search) {
-        console.log("Se esta buscando: ", req.query.search);
-        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        const dat = await Data.findById(req.params.id);
-        const buscar= await Data.find({ nuc: req.query.search })
-        if (errors) {
-            console.log("Error en find (", req.query.search,")");
+        const data = await Data.findOne({ nuc: req.query.search })
+        console.log(data)
+        if (!data) {
             res.render('data/data-searchError');
         } else {
-            //return buscar;
-            console.log("mostrando resultados");  
-            res.redirect('/data/searchCorrect');
+            res.render('data/searchCorrect/', { data});
         }
+    } else {
+        res.render('data/search');
     }
-    else {
-  
-            res.render('data/search');
-        }
 });
-
-router.put('/data/searchCorrect/:id', async (req, res) => {
-    const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
-        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
-    await Data.findByIdAndUpdate(req.params.id, {
-        departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
-        fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file
-    });
-    req.flash('success_msg', 'Encontrado correctamente');
-    res.render('/data/searchCorrect', {dat});
-});
-
-
 
 //indicar si un usuario esta login
 function isLoggedIn(req, res, next) {
@@ -320,5 +180,8 @@ router.get('/data/private', (req, res) => {
 function escapeRegex(text) {
     return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
+
+
+
 
 module.exports = router;
