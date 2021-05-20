@@ -156,7 +156,7 @@ router.get('/data/search/', /*isLoggedIn,*/ async function (req, res) {
         if (!data) {
             res.render('data/data-searchError');
         } else {
-            res.render('data/searchCorrect/', { data});
+            res.render('data/searchCorrect', { registros: data});
         }
     } else {
         res.render('data/search');
