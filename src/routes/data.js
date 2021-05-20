@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const Data = require('../models/Data');
 
+
+//AÑADIR REGISTROS
 router.get('/data/add', isLoggedIn, (req, res) => {
     res.render('data/new-data');
 });
@@ -142,6 +144,8 @@ router.get('/data/view/:id', isLoggedIn, async (req, res) => {
     res.render('data/view-data', { dat });
 });
 
+
+
 //BUSCAR2
 router.get('/data/search/', /*isLoggedIn,*/ async function (req, res) {
     //buscar
@@ -149,10 +153,10 @@ router.get('/data/search/', /*isLoggedIn,*/ async function (req, res) {
     if (req.query.search) {
         console.log("Se esta buscando: ", req.query.search);
         const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-        console.log(regex)
+        console.log(regex);
         //consultar base de datos
-        const data = await Data.findOne({ nuc: req.query.search })
-        console.log(data)
+        const data = await Data.findOne({ nuc: req.query.search });
+        console.log(data);
         if (!data) {
             res.render('data/data-searchError');
         } else {

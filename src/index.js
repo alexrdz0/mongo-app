@@ -8,6 +8,7 @@ const passport = require('passport');
 const Handlebars = require('handlebars');
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const flash = require('connect-flash');
+const token = require('./config/authToken');
 
 //Inicializaciones
 const app = express();
@@ -34,6 +35,8 @@ app.set('view engine', '.hbs');
 //middlewares
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride('_method'));
+app.use(token);
+
 
     //almacenar datos de usuario temporalmente
 app.use(session({
@@ -74,3 +77,6 @@ app.listen(app.get('port'), () =>{
     console.log('Server on port', app.get('port'));
 });
 
+module.exports={
+    SECRET_TOKEN: process.env.SECRET_TOKEN || '112233llavesecreta332211'
+}
