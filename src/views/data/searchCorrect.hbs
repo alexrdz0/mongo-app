@@ -4,13 +4,13 @@
     </div>
 </header>
 <div class="row g-3">
-    <form action="/data/searchCorrect/{{nuc}}?_method=PUT" method="POST" class="row g-3">
+    <form action="/data/searchCorrect/{{data._id}}?_method=PUT" method="POST" class="row g-3">
         <input type="hidden" name="_method" value="PUT">
 
         <div class="col-md-4" style="color:#FFF;">
             <label for="departamento" class="form-label">Departamento</label>
             <select id="departamento" class="form-select" name="departamento">
-                <option selected value="{{departamento}}">departamento</option>
+                <option selected value="{{data.departamento}}">departamento</option>
                 <option value="DAEDIF 50">DAEDIF 50</option>
                 <option value="DAEDIF">DAEDIF</option>
             </select>
@@ -18,27 +18,27 @@
         <div class="col-md-4" style="color:#FFF;">
             <label for="avance" class="form-label">Avance</label>
             <input type="text" class="form-control" id="avance" name="avance" readonly onmousedown="return false;"
-                value=" {{nuc.avance}}">
+                value=" {{data.avance}}">
         </div>
         <div class="col-md-3" style="color:#FFF;">
             <label for="status" class="form-label">Status</label>
             <input type="status" class="form-control" id="status" name="status" readonly onmousedown="return false;"
-                value="{{nuc.status}}">
+                value="{{data.status}}">
         </div>
         <div class="col-3" style="color:#FFF;">
             <label for="nuc" class="form-label">NUC</label>
             <input type="text" class="form-control" id="nuc" placeholder="Ingresa el NUC" required name="nuc" readonly
-                onmousedown="return false;" value="{{dat.nuc}}">
+                onmousedown="return false;" value="{{data.nuc}}">
         </div>
         <div class="col-8" style="color:#FFF;">
             <label for="oficio " class="form-label">Oficio</label>
             <input type="text" class="form-control" id="oficio" placeholder="Oficio" name="oficio" required readonly
-                onmousedown="return false;" value="{{dat.oficio}}">
+                onmousedown="return false;" value="{{data.oficio}}">
         </div>
         <div class="col-md-3" style="color:#FFF;">
             <label for="equipo" class="form-label">Equipo</label>
             <select id="equipo" class="form-select" name="equipo" required readonly onmousedown="return false;">
-                <option value="{{dat.equipo}}">SELECCIONA</option>
+                <option value="{{data.equipo}}">SELECCIONA</option>
                 <option value="Computadora">Computadora</option>
                 <option value="Laptop">Laptop</option>
                 <option value="Celular">Celular</option>
@@ -63,7 +63,7 @@
         <div class="col-md-3" style="color:#FFF;">
             <label for="zona" class="form-label">Zona</label>
             <select id="zona" class="form-select" required name="zona" readonly onmousedown="return false;"
-                value="{{dat.fechaD}}">
+                value="{{data.fechaD}}">
                 <option selected>SELECCIONA</option>
                 <option value="Chihuahua">Chihuahua</option>
                 <option value="zon1">agregar faltantes</option>
@@ -73,72 +73,72 @@
         <div class="col-md-3" style="color:#FFF;">
             <label for="FechaD" class="form-label">Fecha de delito</label>
             <input type="date" class="form-control" id="fechaD" name="fechaD" readonly onmousedown="return false;"
-                required value="{{dat.fechaD}}">
+                required value="{{data.fechaD}}">
         </div>
 
         <div class="col-md-3" style="color:#FFF;">
             <label for="hora" class="form-label">Hora aproximada del delito</label>
             <input type="time" class="form-control" id="hora" name="hora" required readonly onmousedown="return false;"
-                value="{{dat.hora}}">
+                value="{{data.hora}}">
         </div>
 
         <div class="col-md-3" style="color:#FFF;">
             <label for="fechaR" class="form-label">Fecha de recepción</label>
             <input type="date" class="form-control readonly" id="fechaR" name="fechaR" required readonly
-                onmousedown="return false;" value="{{dat.fechaR}}">
+                onmousedown="return false;" value="{{data.fechaR}}">
         </div>
 
         <div class="col-10" style="color:#FFF;">
             <label for="id_del" class="form-label">Identificador del delito</label>
             <input type="text" class="form-control" id="id_del" placeholder="Identificador delito" name="id_del"
-                readonly onmousedown="return false;" value="{{dat.id_del}}">
+                readonly onmousedown="return false;" value="{{data.id_del}}">
         </div>
 
         <div class="col-6" style="color:#FFF;">
             <label for="delito" class="form-label">Delito</label>
             <input type="text" class="form-control" id="delito" placeholder="Nombre del delito" name="delito" readonly
-                onmousedown="return false;" value="{{dat.delito}}">
+                onmousedown="return false;" value="{{data.delito}}">
         </div>
         <div class="col-4" style="color:#FFF;">
             <label for="num_if" class="form-label">Número de oficio IF</label>
             <input type="text" class="form-control" id="num_if" placeholder="Número de oficio (IF)" name="num_if"
-                readonly onmousedown="return false;" value="{{dat.num_if}}">
+                readonly onmousedown="return false;" value="{{data.num_if}}">
         </div>
         <div class="col-md-3" style="color:#FFF;">
             <label for="FechaC" class="form-label">Fecha cont</label>
             <input type="date" class="form-control" id="fechaC" name="fechaC" readonly onmousedown="return false;"
-                value="{{dat.fechaC}}">
+                value="{{data.fechaC}}">
         </div>
 
         <div class="col-6" style="color:#FFF;">
             <label for="lic" class="form-label">Licenciado(a)</label>
             <input type="text" class="form-control" id="lic" placeholder="Nombre del Lic." name="lic" readonly
-                onmousedown="return false;" value="{{dat.lic}}">
+                onmousedown="return false;" value="{{data.lic}}">
         </div>
         <div class="col-6" style="color:#FFF;">
             <label for="agente" class="form-label">Agente</label>
             <input type="text" class="form-control" id="agente" placeholder="Nombre del Agente" name="agente" readonly
-                onmousedown="return false;" value="{{dat.agente}}">
+                onmousedown="return false;" value="{{data.agente}}">
         </div>
         <div class="col-md-3" style="color:#FFF;">
             <label for="echaRecol" class="form-label">Fecha de Recolección</label>
             <input type="date" class="form-control readonly" id="echaRecol" name="fechaRecol" readonly
-                onmousedown="return false;" value="{{dat.fechaRecol}}">
+                onmousedown="return false;" value="{{data.fechaRecol}}">
         </div>
         <div class="col-12" style="color:#FFF;">
             <label for="dir" class="form-label">Dirección de recolección</label>
             <input type="text" class="form-control" id="dir" placeholder="dir" name="dir" readonly
-                onmousedown="return false;" value="{{dat.dir}}">
+                onmousedown="return false;" value="{{data.dir}}">
         </div>
         <div class="col-10" style="color:#FFF;">
             <label for="dis" class="form-label">Dispositivos para entrega</label>
             <input type="text" class="form-control" id="dis" placeholder="dispositivos" name="dis" readonly
-                onmousedown="return false;" value="{{dat.dis}}">
+                onmousedown="return false;" value="{{data.dis}}">
         </div>
         <div class="col-8" style="color:#FFF;">
             <label for="evidencia" class="form-label">Evidencia entregada</label>
             <input type="text" class="form-control" id="dir" placeholder="evidencia" name="evidencia" readonly
-                onmousedown="return false;" value="{{dat.evidencia}}">
+                onmousedown="return false;" value="{{data.evidencia}}">
         </div>
 
         <!--Ocultar seccion -->
@@ -153,62 +153,62 @@
             <div class="col-4" style="color:#FFF;">
                 <label for="banco" class="form-label">Banco</label>
                 <input type="text" class="form-control" id="banco" placeholder="" name="banco" readonly
-                    onmousedown="return false;" value="{{dat.banco}}">
+                    onmousedown="return false;" value="{{data.banco}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="marcaEqui" class="form-label">Marca del Equipo</label>
                 <input type="text" class="form-control" id="marcaEqui" placeholder="" name="marcaEqui" readonly
-                    onmousedown="return false;" value="{{dat.marcaEqui}}">
+                    onmousedown="return false;" value="{{data.marcaEqui}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="modeloEqui" class="form-label">Modelo del Equipo</label>
                 <input type="text" class="form-control" id="modeloEqui" placeholder="" name="modeloEqui" readonly
-                    onmousedown="return false;" value="{{dat.modeloEqui}}">
+                    onmousedown="return false;" value="{{data.modeloEqui}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="serieEqui" class="form-label">Número de serie del Equipo</label>
                 <input type="text" class="form-control" id="serieEqui" placeholder="" name="serieEqui" readonly
-                    onmousedown="return false;" value="{{dat.serieEqui}}">
+                    onmousedown="return false;" value="{{data.serieEqui}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="marcaAlma" class="form-label">Marca de almacenamiento</label>
                 <input type="text" class="form-control" id="marcaAlma" placeholder="" name="marcaAlma" readonly
-                    onmousedown="return false;" value="{{dat.marcaAlma}}">
+                    onmousedown="return false;" value="{{data.marcaAlma}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="modeloAlma" class="form-label">Modelo del almacenamiento</label>
                 <input type="text" class="form-control" id="modeloAlma" placeholder="" name="modeloAlma" readonly
-                    onmousedown="return false;" value="{{dat.modeloAlma}}">
+                    onmousedown="return false;" value="{{data.modeloAlma}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="serieAlma" class="form-label">Número de serie del almacenamiento</label>
                 <input type="text" class="form-control" id="serieAlma" placeholder="" name="serieAlma" readonly
-                    onmousedown="return false;" value="{{dat.serieAlma}}">
+                    onmousedown="return false;" value="{{data.serieAlma}}">
             </div>
             <div class="col-8" style="color:#FFF;">
                 <label for="md5" class="form-label">MD5</label>
                 <input type="text" class="form-control" id="md5" placeholder="" name="md5" readonly
-                    onmousedown="return false;" value="{{dat.md5}}">
+                    onmousedown="return false;" value="{{data.md5}}">
             </div>
             <div class="col-8" style="color:#FFF;">
                 <label for="sha1" class="form-label">SHA1</label>
                 <input type="text" class="form-control" id="sha1" placeholder="" name="sha1" readonly
-                    onmousedown="return false;" value="{{dat.sha1}}">
+                    onmousedown="return false;" value="{{data.sha1}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="swImagen" class="form-label">Software creador de imagén</label>
                 <input type="text" class="form-control" id="swImagen" placeholder="" name="swImagen" readonly
-                    onmousedown="return false;" value="{{dat.swImaen}}">
+                    onmousedown="return false;" value="{{data.swImaen}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="swArte" class="form-label">Software artefactos</label>
                 <input type="text" class="form-control" id="swArte" placeholder="" name="swArte" readonly
-                    onmousedown="return false;" value="{{dat.swArte}}">
+                    onmousedown="return false;" value="{{data.swArte}}">
             </div>
             <div class="col-4" style="color:#FFF;">
                 <label for="swInfo" class="form-label">Software información</label>
                 <input type="text" class="form-control" id="swInfo" placeholder="" name="swInfo" readonly
-                    onmousedown="return false;" value="{{dat.swInfo}}">
+                    onmousedown="return false;" value="{{data.swInfo}}">
             </div>
         </div>
         <div class="col-4">
