@@ -1,12 +1,16 @@
-const express= require ('express');
-const router= express.Router();
+const express = require('express');
+const router = express.Router();
 const User = require('../models/User');
-const passport = require ('passport');
+const passport = require('passport');
 //pvs
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const { session } = require('passport');
+const jwt =require ('jsonwebtoken');
+const config = require('../config/config');
+const Role = require('../models/Role');
+
 
 //midleware
 //app.use(morgan('dev'));
@@ -15,50 +19,55 @@ const { session } = require('passport');
 
 
 //login
-router.get('/users/signin', (req, res) =>{
-    res.render('users/signin',{
+router.get('/users/signin', (req, res) => {
+    res.render('users/signin', {
         message: req.flash('loginMessage')
     })
 });
 
 router.post('/users/signin', passport.authenticate('local', {
-    
+
     successRedirect: '/profile',
     failureRedirect: '/users/signin',
     // badRequestMessage: 'Algo salio mal, intenta nuevamente',
-    failureFlash: true,
-    }));
+    failureFlash: true
+    
+    
+}));
 
-router.get('/profile', isLoggedIn, (req, res) =>{
-    res.render('data/profile',{
+
+
+
+router.get('/profile', isLoggedIn, (req, res) => {
+    res.render('data/profile', {
         user: req.user
     })
-}
-);
- 
+});
+
+
 //logout
-router.get('/logout', (req, res)=>{
+router.get('/logout', (req, res) => {
     req.logOut();
     res.redirect('/');
 });
 
 //indicar si un usuario esta login
-function isLoggedIn(req, res, next){
-    if (req.isAuthenticated()){
-        return next ();
-        
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        return next();
+
     }
     return res.redirect('/');
 }
 
-/*
+
 //Registro de nuevo usuario
 router.get('/users/signup', (req, res) =>{
     res.render('users/signup');
 });
 
 router.post('/users/signup', async (req, res) =>{
-    const {name, email, password, confirm_pass} = req.body;
+    const {name, email, password, confirm_pass, role} = req.body;
     const errors = [];
     console.log(req.body);
     if(name.length <= 0){
@@ -94,14 +103,30 @@ router.post('/users/signup', async (req, res) =>{
         }
 
         //almacenar al nuevo usuario
+        const {name, email, password, roles} = req.body;
         const newUser = new User({name, email, password});
         newUser.password = await newUser.encryptPassword(password);
-        await newUser.save();
+
+        //saber si se le asigno algún rol
+        if (roles){
+            const encontrarRoles = await Role.find({name: {$in : roles}})
+            newUser.roles = encontrarRoles.map(role => role._id)
+        } else{
+            const role = await Role.findOne({name: "user"});
+            newUser.roles=[role._id];
+        }
+
+        const savedUser = await newUser.save();
+        console.log(savedUser);
+
+        //creacion de token
+        const token = jwt.sign({id: savedUser}, config.SECRET, {
+            expiresIn: 86400 //24 horas
+        });
         req.flash('success_msg', 'Registrado con éxito!');
         res.redirect('/users/signin');
     }
-});*/
+});
 //module.exports={"isLoggedIn": isLoggedIn};
 
-module.exports= router;
-
+module.exports = router;

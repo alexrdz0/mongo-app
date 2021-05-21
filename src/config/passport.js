@@ -1,14 +1,15 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const User = require('../models/User');
-
+const Role = require('../models/Role');
+const jwt =require ('jsonwebtoken');
 
 passport.use( new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, email, password, done) => {
-    const user = await User.findOne({'email': email});
+    const user = await (await User.findOne({'email': email})).populated("roles");
     //comprobar que el usuario existe
     if(user == null){
     //if(!user){
@@ -18,9 +19,13 @@ passport.use( new LocalStrategy({
         const match = await user.matchPassword(password);
         if (match){
             return done(null, user);
+            const token =  jwt.sign({id: user._id}, config.SECRET,{
+                expiresIn: 86400
+            });
         } else{
             return done(null, false, {message: 'Contraseña incorrecta'});
         }
+        
     }
     
 }));

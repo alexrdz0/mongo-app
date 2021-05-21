@@ -2,6 +2,8 @@ const { request } = require('express');
 const express = require('express');
 const router = express.Router();
 const Data = require('../models/Data');
+const verifyToken = require ('../middlewares')
+
 
 
 //AÑADIR REGISTROS
@@ -12,7 +14,7 @@ router.get('/data/add', isLoggedIn, (req, res) => {
 //ruta para guardar registros
 //se utiliza async para indicar que dentro de la funcion existen procesos asincronos
 
-router.post('/data/new-data', async (req, res) => {
+router.post('/data/new-data',verifyToken, async (req, res) => {
     //obtener los valores y guardarlos
     const { departamento, avance, status, nuc, oficio, equipo, unidad, zona, fechaD, hora, fechaR, id_del, delito, num_if,
         fechaC, lic, agente, fechaRecol, dir, dis, evidencia, banco, marcaEqui, modeloEqui, serieEqui, marcaAlma, modeloAlma, serieAlma, md5, sha1, swImagen, swArte, swInfo, file } = req.body;
